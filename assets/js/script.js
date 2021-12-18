@@ -87,13 +87,23 @@ function endApi(lat, lon) {
         })
         .then(function (data) {
             console.log(data);
-    
+
+       
     var currentTemp = data.current.temp;
     var currentWind = data.current.wind_speed;
     var currentHumid = data.current.humidity;
     var currentUV = data.current.uvi;
-
     console.log(currentTemp, currentWind, currentHumid, currentUV);
+
+    var array = []
+
+    array.push(currentTemp)
+    array.push(currentWind)
+    array.push(currentHumid)
+    array.push(currentUV)
+
+    console.log(array)
+    
 
     });
 }
