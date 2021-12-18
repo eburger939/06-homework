@@ -46,10 +46,10 @@ cityFormEl.on('submit', searchCity);
 
 
 function searchApi(cityName){
-    var queryUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
+    var queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
 
     if (cityName) {
-        queryUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey;
+        queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey;
         console.log(queryUrl)
     } 
 
@@ -58,14 +58,42 @@ function searchApi(cityName){
         if (!response.ok) {
         throw response.json();
         }
+        console.log(response); 
         return response.json();
-         })
+        
+    })
         .then(function (data){
         console.log(data);
-        for (var i =0; i <data.length; i++) {
-            var listItem = document.createElement('li');
-            listItem.textContent = data[i].url;
-            currWeather.append(listItem);
+
+    var lat = data.coord.lat;
+    var lon = data.coord.lon;
+            console.log(lat);
+            console.log(lon);  
+
+    endApi(lat, lon);        
+        });
+    }
+
+function endApi(lat, lon) {
+    var completeQuery =  'https://api.openweathermap.org/data/2.5/onecall?lat=' +lat + '&lon=' +lon + '&exclude=hourly&units=imperial&appid=' + apiKey;
+
+    fetch(completeQuery)
+    .then(function (response){
+        if (!response.ok) {
+            throw response.json();
         }
+        console.log(response);
+        return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+    
+    var currentTemp = data.current.temp;
+    var currentWind = data.current.wind_speed;
+    var currentHumid = data.current.humidity;
+    var currentUV = data.current.uvi;
+
+    console.log(currentTemp, currentWind, currentHumid, currentUV);
+
     });
 }
