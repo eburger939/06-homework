@@ -1,6 +1,6 @@
 //variables
-var cityFormEl = $('.btn');
-var cityList = $('#city-list');
+var cityFormEl = $('#city-form');
+var cityList = $('.city-list');
 
 
 //adding city names below in a list
@@ -15,13 +15,13 @@ function searchCity(event) {
     }
 
     var cityNameEl = $(
-        '<li class="flex-row justify-space-between align-center p-2 bg-light text-dark">'
+        '<div class="bg-dark bg-gradient text-white text-center">'
         );
 
     cityNameEl.text(cityName);
     cityList.append(cityNameEl);
 
-    // $('input[name="city-input"]').val('');
+    $('input[name="city-input"]').val('');
 
 }
-cityFormEl.on('click', searchCity);
+cityFormEl.on('submit', searchCity);
