@@ -88,8 +88,18 @@ function endApi(lat, lon) {
         .then(function (data) {
             console.log(data);
 
-       
-    var currentTemp = data.current.temp;
+   
+   var currentTemp = data.current.temp;
+            var temp = document.createElement('p');
+            temp.textContent = currentTemp
+            currWeather.append(temp)
+            console.log(temp)
+
+
+
+
+
+
     var currentWind = data.current.wind_speed;
     var currentHumid = data.current.humidity;
     var currentUV = data.current.uvi;
@@ -102,8 +112,8 @@ function endApi(lat, lon) {
     array.push(currentHumid)
     array.push(currentUV)
 
-    console.log(array)
+    console.log(array);
     
 
-    });
+});
 }
