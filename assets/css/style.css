@@ -1,5 +1,23 @@
 
 
-.current{
-    border: 5px black solid;
+.current-w {
+    border: 1px black solid;
+    padding: 5px;
+}
+
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
 }

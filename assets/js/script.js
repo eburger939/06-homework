@@ -47,7 +47,7 @@ cityFormEl.on('submit', searchCity);
 
 function searchApi(cityName){
     var queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
-
+// currWeather.hidden = false;
     if (cityName) {
         queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey;
         console.log(queryUrl)
@@ -76,7 +76,7 @@ function searchApi(cityName){
 
 function endApi(lat, lon) {
     var completeQuery =  'https://api.openweathermap.org/data/2.5/onecall?lat=' +lat + '&lon=' +lon + '&exclude=hourly&units=imperial&appid=' + apiKey;
-
+// currWeather.innerHTML = ('');
     fetch(completeQuery)
     .then(function (response){
         if (!response.ok) {
@@ -88,32 +88,55 @@ function endApi(lat, lon) {
         .then(function (data) {
             console.log(data);
 
-   
+
+   //logging current weather onto the page
    var currentTemp = data.current.temp;
-            var temp = document.createElement('p');
-            temp.textContent = currentTemp
-            currWeather.append(temp)
-            console.log(temp)
+        var temp = document.createElement('p');
+        temp.textContent = 'Temperature (F): ' +currentTemp;
+        currWeather.append(temp)
+        console.log(temp)
 
+     var currentWind = data.current.wind_speed;
+        var wind = document.createElement('p');
+        wind.textContent = 'Wind speed (mph): ' +currentWind;
+        currWeather.append(wind)
+        console.log(wind)
 
-
-
-
-
-    var currentWind = data.current.wind_speed;
     var currentHumid = data.current.humidity;
+        var humid = document.createElement('p');
+        humid.textContent = 'Humidity: ' +currentHumid;
+        currWeather.append(humid)
+        console.log(humid)
+
     var currentUV = data.current.uvi;
-    console.log(currentTemp, currentWind, currentHumid, currentUV);
+        var uvi = document.createElement('p');
+        // uvi.className = "uv-index"
+        uvi.textContent = 'UV Index: ' +currentUV;
+        currWeather.append(uvi)
+        console.log(uvi)
+        if (currentUV <= 2.99){
+            uvi.classList.add("green");
+        } else if (currentUV == 3-5.99) {
+            uvi.classList.add("yellow")
+        } else if (currentUV == 6-8){
+            uvi.classList.add("orange")
+    } else {
+        uvi.classList.add("red")
+    }
+            
 
-    var array = []
 
-    array.push(currentTemp)
-    array.push(currentWind)
-    array.push(currentHumid)
-    array.push(currentUV)
+//    var array = []
 
-    console.log(array);
+//     array.push(currentTemp)
+//     array.push(currentWind)
+//     array.push(currentHumid)
+//     array.push(currentUV)
+
+//     console.log(array);
     
 
 });
 }
+
+
