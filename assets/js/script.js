@@ -136,6 +136,13 @@ function endApi(lat, lon) {
 //     console.log(array);
     
 
+for (var i=0; i<5; i++) {
+    var forecast = data.daily[i]
+    console.log(forecast)
+    // var days = forecast[i]
+    // console.log(days)
+}
+
 });
 }
 
