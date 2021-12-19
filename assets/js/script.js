@@ -6,6 +6,9 @@ var cityFormEl = $('#city-form');
 var cityList = $('.city-list');
 var currWeather = $('.current-w');
 var apiKey = "1cfb34a53bf8b5e073240d3987394c4d";
+var cards5 = $(".cards");
+var day5 = [];
+var space = $(".space");
 
 
 
@@ -47,7 +50,7 @@ cityFormEl.on('submit', searchCity);
 
 function searchApi(cityName){
     var queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
-// currWeather.hidden = false;
+// space.hidden = false;
     if (cityName) {
         queryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey;
         console.log(queryUrl)
@@ -76,7 +79,7 @@ function searchApi(cityName){
 
 function endApi(lat, lon) {
     var completeQuery =  'https://api.openweathermap.org/data/2.5/onecall?lat=' +lat + '&lon=' +lon + '&exclude=hourly&units=imperial&appid=' + apiKey;
-// currWeather.innerHTML = ('');
+    currWeather.innerHTML = "";
     fetch(completeQuery)
     .then(function (response){
         if (!response.ok) {
@@ -139,11 +142,49 @@ function endApi(lat, lon) {
 for (var i=0; i<5; i++) {
     var forecast = data.daily[i]
     console.log(forecast)
-    // var days = forecast[i]
-    // console.log(days)
-}
+
+
+
+    var iconCode = forecast.weather[0].icon;
+    console.log(iconCode)   
+    var temp5 = forecast.temp.day;
+    console.log(temp5)
+    var humidity5 = forecast.humidity;
+    var windSpeed5 = forecast.wind_speed;
+}  
+    var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        $('#wicon').attr('src', iconurl)
+        console.log(iconurl)
+        
+        var temper = document.createElement('p');
+        temper.textContent = 'Temperature (F): ' +temp5;
+        cards5.append(temper)
+    
+        
+        var humi = document.createElement('p');
+        humi.textContent = 'Humidity: ' +humidity5;
+        cards5.append(humi)
+        console.log(humi);
+
+
+        
+        var windy = document.createElement('p');
+        windy.textContent = 'Wind speed (mph): ' +windSpeed5;
+        cards5.append(windy)
+        console.log(windy);
+
+
 
 });
 }
+
+
+
+
+
+
+
+    
+
 
 
