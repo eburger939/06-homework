@@ -6,9 +6,8 @@ var cityFormEl = $('#city-form');
 var cityList = $('.city-list');
 var currWeather = $('.current-w');
 var apiKey = "1cfb34a53bf8b5e073240d3987394c4d";
-var cards5 = $(".cards");
-var day5 = [];
-var specs = $(".specs");
+var cards = $(".cards");
+var space = $(".space")
 
 
 
@@ -25,14 +24,16 @@ function searchCity(event) {
 
     var cityName = $('input[name="city-input"]').val();
     console.log(cityName);
+    //or say there is no click??
     if(!cityName) {
         alert("Please search by City name")
      return;
     }
  var cityNameEl = $(
-        '<div class="bg-dark bg-gradient text-white text-center">'
+        '<button class="cityBtn bg-dark bg-gradient text-white text-center w-100">'
         );
  cityNameEl.text(cityName);
+//  cityNameEl.setAttribute("type", "submit")
 cityList.append(cityNameEl);
 
 $('input[name="city-input"]').val('');
@@ -41,10 +42,13 @@ var currentHeader = $('h2');
 currentHeader.text("Displaying current weather for " +cityName +":");
 currWeather.append(currentHeader);
 
-searchApi(cityName);
 
+// cityNameEl.on('click', searchApi)
+
+searchApi(cityName);
 }
 cityFormEl.on('submit', searchCity);
+
 
 
 
@@ -79,7 +83,7 @@ function searchApi(cityName){
 
 function endApi(lat, lon) {
     var completeQuery =  'https://api.openweathermap.org/data/2.5/onecall?lat=' +lat + '&lon=' +lon + '&exclude=hourly&units=imperial&appid=' + apiKey;
-    currWeather.innerHTML = "";
+
     fetch(completeQuery)
     .then(function (response){
         if (!response.ok) {
@@ -114,11 +118,12 @@ function endApi(lat, lon) {
         console.log(humid)
 
     var currentUV = data.current.uvi;
+    console.log(currentUV)
         var uvi = document.createElement('p');
         // uvi.className = "uv-index"
         uvi.textContent = 'UV Index: ' +currentUV;
-        currWeather.append(uvi)
         console.log(uvi)
+        currWeather.append(uvi)
         if (currentUV <= 2.99){
             uvi.classList.add("green");
         } else if (currentUV == 3-5.99) {
@@ -128,67 +133,74 @@ function endApi(lat, lon) {
     } else {
         uvi.classList.add("red")
     }
+
+        // currWeather.textContent = "";
+    // currentTemp.textContent = ""
+    // currentWind.textContent = ""
+    // currentHumid.textContent = ""
+    // currentUV.textContent = ""
 dayForecast(data);
 
 });
 }           
 
 var dayForecast = function (data) {
+    cards.textContent = "";
 for (var i=0; i<5; i++) {
-    var temp5 = data.daily[i].temp.day
-    var humidity5 = data.daily[i].humidity
-    var windSpeed5 = data.daily[i].wind_speed
-    var iconCode = data.daily[i].weather[0].icon;
+    var forecast = data.daily[i]
+    var temp5 = forecast.temp.day
+    var humidity5 = forecast.humidity
+    var windSpeed5 = forecast.wind_speed
+    var iconCode = forecast.weather[0].icon;
+    var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     console.log(temp5)
     console.log(humidity5)
     console.log(windSpeed5)
     console.log(iconCode)
 
-    var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    $('#wicon').attr('src', iconurl)
-    console.log(iconurl)
 
- 
-}
-  
-    // var iconCode = forecast.weather[0].icon;
-    // console.log(iconCode)   
-    // var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    // $('#wicon').attr('src', iconurl)
-    // console.log(iconurl)
+    var next = document.createElement('div')
+    next.classList = "col d-flex"
+    cards.append(next)
+
+    var cardBody = document.createElement('div')
+    cardBody.classList = "card-body"
+    next.append(cardBody)
+
+    // var cardHeader = document.createElement('h3')
+    // var time= moment(forecast).format("DD-MM-YYY").add(5, 'days')
+    // cardHeader.textContent = time
+    // cardHeader.classList = "card-header text-center"
+    // cardBody.appendChild(cardHeader)
+
+    var icon = document.createElement('img')
+    icon.classList = "icon"
+    icon.setAttribute('src', iconurl)
+    cardBody.append(icon)
+
     
-    // var temp5 = forecast.temp.day;
     var te = document.createElement('p')
+    // te.classList = "card-body"
     te.textContent = 'Temperature (F): ' +temp5;
-    specs.append(te)
+    cardBody.append(te)
     console.log(te)
-   
-    // var humidity5 = forecast.humidity;
+
+
     var hum = document.createElement('p')
+    // hum.classList = 'card-body text-center'
     hum.textContent = 'Humidity: ' +humidity5;
-    specs.append(hum)
+    cardBody.append(hum)
     console.log(hum)
-    
-    // var windSpeed5 = forecast.wind_speed;
+
+
     var win = document.createElement('p')
+    // win.classList = 'card-body text-center'
     win.textContent = 'Wind Speed (mph): ' +windSpeed5;
-    specs.append(win)
+    cardBody.append(win)
     console.log(win)
 
-
-
-
-//     var fingersCross = {
-//     temp5,
-//     humidity5,
-//     windSpeed5,
-// }
-// console.log(fingersCross)
-
-// specs.append(fingersCross);
-// });
-
-
-
 }
+}
+
+
 

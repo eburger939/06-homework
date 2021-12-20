@@ -1,9 +1,9 @@
-
+/* 
 
 .current-w {
     border: 1px black solid;
     padding: 5px;
-}
+} */
 
 
 .green {
@@ -24,4 +24,9 @@
 
 .row col-12 {
     border: 1px black solid;
+}
+
+.card-body {
+    background-color: lightblue;
+    border: lightcoral 2px solid;
 }
