@@ -25,6 +25,7 @@ function searchCity(event) {
   cityNameEl.text(cityName);
   //  cityNameEl.setAttribute("type", "submit")
   cityList.append(cityNameEl);
+  cityNameEl.on('click', searchApi)
 
   $('input[name="city-input"]').val("");
 
