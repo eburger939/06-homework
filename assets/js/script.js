@@ -5,8 +5,7 @@ var currWeather = $(".current-w");
 var apiKey = "1cfb34a53bf8b5e073240d3987394c4d";
 var cards = $(".cards");
 var space = $(".space");
-var cardBody = $('.card-body')
-var cityName
+var cityBtn = $('cityBtn')
 
 
 
@@ -16,7 +15,6 @@ function searchCity(event) {
 
   cityName = $('input[name="city-input"]').val();
   console.log(cityName);
-  //or say there is no click??
   if (!cityName) {
     alert("Please search by City name");
     return;
@@ -93,6 +91,7 @@ function endApi(lat, lon) {
         currWeather.prepend(
             "<h2> Displaying current weather for " + cityName + ":</h2>"
           );
+     
       //logging current weather onto the page
       var currentTemp = data.current.temp;
       var temp = document.createElement("p");
@@ -135,7 +134,7 @@ function endApi(lat, lon) {
 }
 
 var dayForecast = function (data) {
-  
+    
   for (var i = 0; i < 5; i++) {
     var forecast = data.daily[i];
     var temp5 = forecast.temp.day;
@@ -185,5 +184,7 @@ var dayForecast = function (data) {
     win.textContent = "Wind Speed (mph): " + windSpeed5;
     cardBody.append(win);
     console.log(win);
+
+    
   }
 };
