@@ -135,45 +135,60 @@ dayForecast(data);
 
 var dayForecast = function (data) {
 for (var i=0; i<5; i++) {
-    var forecast = data.daily[i]
-    console.log(forecast)
-    
-specs.each(function() { 
-    var iconCode = forecast.weather[0].icon;
-    console.log(iconCode)   
+    var temp5 = data.daily[i].temp.day
+    var humidity5 = data.daily[i].humidity
+    var windSpeed5 = data.daily[i].wind_speed
+    var iconCode = data.daily[i].weather[0].icon;
+    console.log(temp5)
+    console.log(humidity5)
+    console.log(windSpeed5)
+    console.log(iconCode)
+
     var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     $('#wicon').attr('src', iconurl)
     console.log(iconurl)
+
+ 
+}
+  
+    // var iconCode = forecast.weather[0].icon;
+    // console.log(iconCode)   
+    // var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    // $('#wicon').attr('src', iconurl)
+    // console.log(iconurl)
     
-    var temp5 = forecast.temp.day;
+    // var temp5 = forecast.temp.day;
     var te = document.createElement('p')
     te.textContent = 'Temperature (F): ' +temp5;
     specs.append(te)
     console.log(te)
    
-    var humidity5 = forecast.humidity;
+    // var humidity5 = forecast.humidity;
     var hum = document.createElement('p')
     hum.textContent = 'Humidity: ' +humidity5;
     specs.append(hum)
     console.log(hum)
     
-    var windSpeed5 = forecast.wind_speed;
+    // var windSpeed5 = forecast.wind_speed;
     var win = document.createElement('p')
     win.textContent = 'Wind Speed (mph): ' +windSpeed5;
     specs.append(win)
     console.log(win)
 
-    var fingersCross = {
-    temp5,
-    humidity5,
-    windSpeed5,
+
+
+
+//     var fingersCross = {
+//     temp5,
+//     humidity5,
+//     windSpeed5,
+// }
+// console.log(fingersCross)
+
+// specs.append(fingersCross);
+// });
+
+
+
 }
-console.log(fingersCross)
 
-specs.append(fingersCross);
-});
-
-
-
-}
-}
