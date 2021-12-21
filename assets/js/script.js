@@ -5,7 +5,7 @@ var currWeather = $(".current-w");
 var apiKey = "1cfb34a53bf8b5e073240d3987394c4d";
 var cards = $(".cards");
 var space = $(".space");
-var cityBtn = $('cityBtn')
+var specs = $('.specs');
 
 
 
@@ -25,7 +25,6 @@ function searchCity(event) {
   cityNameEl.text(cityName);
   //  cityNameEl.setAttribute("type", "submit")
   cityList.append(cityNameEl);
-  cityNameEl.on('click', searchApi)
 
   $('input[name="city-input"]').val("");
 
@@ -135,7 +134,7 @@ function endApi(lat, lon) {
 }
 
 var dayForecast = function (data) {
-    
+    specs.empty();
   for (var i = 0; i < 5; i++) {
     var forecast = data.daily[i];
     var temp5 = forecast.temp.day;
@@ -150,7 +149,7 @@ var dayForecast = function (data) {
 
     var next = document.createElement("div");
     next.classList = "col d-flex";
-    cards.append(next);
+    specs.append(next);
 
     var cardBody = document.createElement("div");
     cardBody.classList = "card-body";
