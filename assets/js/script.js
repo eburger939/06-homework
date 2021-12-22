@@ -9,6 +9,23 @@ var specs = $('.specs');
 
 
 
+
+
+
+$(document).ready(function(){
+    cityList.on("click", ".cityBtn",function() {
+      
+      cityName = $(this).text()
+      console.log(cityName);
+      searchApi(cityName)
+    })
+
+})
+
+// document.querySelector(".cityBtn").addEventListener("click",function(){
+//   console.log("button clicked!!!!!")
+// })
+
 //adding city names below in a list
 function searchCity(event) {
   event.preventDefault();
@@ -30,11 +47,13 @@ function searchCity(event) {
 
   
 
-  // cityNameEl.on('click', searchApi)
+  
 
   searchApi(cityName);
 }
 cityFormEl.on("submit", searchCity);
+
+
 
 function searchApi(cityName) {
   var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
