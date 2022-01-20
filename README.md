@@ -10,4 +10,4 @@
 
 
 ## Link to deployed application
-* https://eburger939.github.io/06-homework/
+* https://eburger939.github.io/weather-dashboard/
